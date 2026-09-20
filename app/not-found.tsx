@@ -1,0 +1,1 @@
+import Link from "next/link"; export default function NotFound(){return <main className="container grid min-h-[70vh] place-items-center text-center"><div><h1 className="text-5xl font-extrabold text-[#A73B24]">404</h1><p className="mt-3 text-[#78716C]">ไม่พบข้อมูลที่คุณกำลังค้นหา</p><Link className="btn btn-primary mt-5" href="/">กลับหน้าหลัก</Link></div></main>}

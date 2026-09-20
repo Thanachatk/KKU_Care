@@ -1,0 +1,2 @@
+"use server"; import { redirect } from "next/navigation"; import { createClient } from "@/lib/supabase/server";
+export async function register(formData:FormData){const supabase=await createClient();const {error}=await supabase.auth.signUp({email:String(formData.get("email")),password:String(formData.get("password")),options:{data:{full_name:String(formData.get("full_name"))},emailRedirectTo:`${process.env.NEXT_PUBLIC_SITE_URL}/`}});if(error)redirect(`/register?error=${encodeURIComponent(error.message)}`);redirect("/login?registered=1");}

@@ -1,0 +1,3 @@
+import { z } from "zod";
+export const caseSchema = z.object({ case_kind:z.enum(["emergency","complaint"]), title:z.string().trim().min(3,"กรุณาระบุชื่อเรื่อง"), category:z.string().min(1,"กรุณาเลือกประเภท"), description:z.string().trim().min(10,"กรุณาระบุรายละเอียดอย่างน้อย 10 ตัวอักษร"), phone:z.string().regex(/^[0-9+()\- ]{8,20}$/,"รูปแบบเบอร์โทรศัพท์ไม่ถูกต้อง"), location_name:z.string().optional(), location_detail:z.string().optional(), latitude:z.number().nullable().optional(), longitude:z.number().nullable().optional() });
+export const trackingSchema = z.object({tracking_code:z.string().min(8), phone_last4:z.string().regex(/^\d{4}$/)});

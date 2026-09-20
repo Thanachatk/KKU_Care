@@ -1,0 +1,2 @@
+import { updatePassword } from "./actions";
+export default function ResetPassword(){return <main className="container grid min-h-[calc(100vh-64px)] place-items-center py-10"><form action={updatePassword} className="card w-full max-w-md p-7"><h1 className="text-2xl font-extrabold">ตั้งรหัสผ่านใหม่</h1><div className="field mt-6"><label htmlFor="password">รหัสผ่านใหม่</label><input id="password" name="password" type="password" minLength={8} required/></div><button className="btn btn-primary w-full">บันทึกรหัสผ่าน</button></form></main>}

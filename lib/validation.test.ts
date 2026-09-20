@@ -1,0 +1,2 @@
+import { describe, expect, it } from "vitest"; import { caseSchema, trackingSchema } from "./validation";
+describe("KKU CARE validation",()=>{it("requires useful case detail",()=>{expect(caseSchema.safeParse({case_kind:"complaint",title:"x",category:"",description:"x",phone:"1"}).success).toBe(false)});it("validates guest phone suffix",()=>{expect(trackingSchema.safeParse({tracking_code:"KKU-2026-00001",phone_last4:"1234"}).success).toBe(true);expect(trackingSchema.safeParse({tracking_code:"KKU-2026-00001",phone_last4:"123"}).success).toBe(false)})});
