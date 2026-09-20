@@ -1,2 +1,2 @@
-"use server"; import { redirect } from "next/navigation"; import { createClient } from "@/lib/supabase/server";
-export async function reset(formData:FormData){const supabase=await createClient();await supabase.auth.resetPasswordForEmail(String(formData.get("email")),{redirectTo:`${process.env.NEXT_PUBLIC_SITE_URL}/reset-password`});redirect("/login?reset=1");}
+"use server"; import { redirect } from "next/navigation"; import { createClient } from "@/lib/supabase/server"; import { isKkuMail } from "@/lib/auth/email-policy";
+export async function reset(formData:FormData){const email=String(formData.get("email")).trim().toLowerCase();if(!isKkuMail(email))redirect(`/forgot-password?error=${encodeURIComponent("กรุณาใช้ KKU Mail (@kkumail.com) เท่านั้น")}`);const supabase=await createClient();await supabase.auth.resetPasswordForEmail(email,{redirectTo:`${process.env.NEXT_PUBLIC_SITE_URL}/reset-password`});redirect("/login?reset=1");}
