@@ -30,6 +30,10 @@ Import repository เข้า Vercel แบบ Next.js แล้วเพิ่
 
 ก่อน deploy รัน `npm run lint`, `npm run typecheck`, `npm run test` และ `npm run build`
 
+## เพิ่มข้อมูลตัวอย่างสำหรับ Demo
+
+หลังรัน migration แล้ว สามารถรัน `supabase/seed_demo.sql` ใน Supabase SQL Editor เพื่อเติมประกาศและคำร้องตัวอย่างสำหรับดู Dashboard โดยข้อมูลจะมีคำว่า `[DEMO]` กำกับและใช้ UUID คงที่เพื่อรันซ้ำได้ การลบข้อมูลตัวอย่างทำได้โดยเอา comment หน้า `delete` ท้ายไฟล์ออกแล้วรันอีกครั้ง
+
 ## หมายเหตุความปลอดภัย
 
 `SUPABASE_SERVICE_ROLE_KEY` ใช้เฉพาะ Server เท่านั้น ห้ามใส่ prefix `NEXT_PUBLIC_` และห้าม commit `.env.local` ระบบตรวจ session/role ที่ server และใช้ RLS เป็นชั้นป้องกันข้อมูลหลัก
