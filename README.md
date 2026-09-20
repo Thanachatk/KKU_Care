@@ -20,6 +20,10 @@ from auth.users u where p.id=u.id and u.email='admin@example.com';
 
 สำหรับ Storage ให้สร้าง private bucket ชื่อ `case-attachments` และเพิ่ม policy ให้เฉพาะเจ้าของคำร้อง/เจ้าหน้าที่ที่ได้รับมอบหมายอ่านไฟล์ได้ โดย upload ผ่าน server route เท่านั้น
 
+### Google Login เฉพาะ KKU Mail
+
+ไปที่ Supabase Dashboard → Authentication → Providers → Google แล้วเปิดใช้งาน Google Provider ด้วย Google OAuth Client ID/Secret จาก Google Cloud Console เพิ่ม Redirect URL เป็น `http://localhost:3000/auth/callback` และ URL ของ Vercel ใน Preview/Production จากนั้นระบบจะอนุญาตเฉพาะบัญชีที่ลงท้ายด้วย `@kkumail.com` เท่านั้น
+
 ## Deploy บน Vercel
 
 Import repository เข้า Vercel แบบ Next.js แล้วเพิ่ม Environment Variables ทั้งชุดจาก `.env.example` ใน Development, Preview และ Production จากนั้นตั้ง Supabase Authentication URL Configuration เป็น Production URL และเพิ่ม `http://localhost:3000/**`, Preview URL และ Production URL เป็น Redirect URLs
