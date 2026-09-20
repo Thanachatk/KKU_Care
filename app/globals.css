@@ -11,6 +11,11 @@ button { cursor:pointer; }
 .container { width:min(1180px,calc(100% - 40px)); margin:auto; }
 .card { border:1px solid var(--border); background:var(--card); border-radius:16px; box-shadow:0 6px 24px rgba(64,35,25,.06); }
 .emergency-contact-card { background:#292524; color:#fff; }
+[data-theme="midnight"] body { --bg:#171311; --card:#241d1a; --text:#f8f4f1; --muted:#c9bdb6; --border:#4b3a34; background:var(--bg); color:var(--text); }
+[data-theme="midnight"] .bg-white { background-color:var(--card)!important; }
+[data-theme="midnight"] .text-\[\#292524\] { color:var(--text)!important; }
+[data-theme="midnight"] input,[data-theme="midnight"] select,[data-theme="midnight"] textarea { background:#302622; color:var(--text); border-color:var(--border); }
+[data-theme="midnight"] .card { border-color:var(--border); }
 .focus-ring:focus-visible, button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible { outline:3px solid #E2A99B; outline-offset:2px; }
 .btn { border:0; border-radius:10px; padding:12px 18px; font-weight:700; transition:.2s; display:inline-flex; align-items:center; justify-content:center; gap:8px; }
 .btn-primary { background:var(--primary); color:#fff; }.btn-primary:hover { background:var(--primary-hover); }.btn-secondary { background:var(--primary-light); color:var(--primary); }.btn-ghost { background:transparent; color:var(--primary); }.btn-danger { background:#DC2626;color:#fff; }
