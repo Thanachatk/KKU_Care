@@ -1,2 +1,13 @@
-import { redirect } from "next/navigation"; import { createClient } from "@/lib/supabase/server";
-export default async function AdminCases(){const supabase=await createClient();const {data:{user}}=await supabase.auth.getUser();if(!user)redirect('/login');const {data:profile}=await supabase.from('profiles').select('role').eq('id',user.id).maybeSingle();if(!profile||!['admin','staff'].includes(profile.role))redirect('/admin');const {data:cases}=await supabase.from('cases').select('id,tracking_code,title,case_kind,status,priority,created_at').order('created_at',{ascending:false}).limit(100);return <main className="container py-10"><h1 className="text-3xl font-extrabold">จัดการคำร้อง</h1><div className="card mt-6 overflow-x-auto"><table className="w-full text-left text-sm"><thead className="bg-[#FAF8F6]"><tr><th className="p-3">รหัส</th><th className="p-3">ชื่อเรื่อง</th><th className="p-3">ประเภท</th><th className="p-3">สถานะ</th><th className="p-3">Priority</th></tr></thead><tbody>{(cases??[]).map(c=><tr key={c.id} className="border-t border-[#E7E2DE]"><td className="p-3 font-bold text-[#A73B24]">{c.tracking_code}</td><td className="p-3">{c.title}</td><td className="p-3">{c.case_kind}</td><td className="p-3"><span className={`status status-${c.status}`}>{c.status}</span></td><td className="p-3">{c.priority}</td></tr>)}</tbody></table></div></main>}
+import { redirect } from "next/navigation";
+import { createClient } from "@/lib/supabase/server";
+import { StaffConsole, type Agency, type StaffCase } from "@/components/staff-console";
+
+export default async function AdminCases() {
+  const supabase = await createClient(); const { data: { user } } = await supabase.auth.getUser(); if (!user) redirect("/login");
+  const { data: profile } = await supabase.from("profiles").select("role,full_name").eq("id", user.id).maybeSingle(); if (!profile || !["admin", "staff"].includes(profile.role)) redirect("/admin");
+  const [{ data: cases }, { data: agencies }] = await Promise.all([
+    supabase.from("cases").select("id,tracking_code,title,category,case_kind,status,priority,location_name,created_at,assigned_agency_id,assigned_staff_id").order("created_at", { ascending: false }).limit(100),
+    supabase.from("agencies").select("id,name").eq("is_active", true).order("name"),
+  ]);
+  return <main className="bg-[var(--bg)] py-8 sm:py-10"><div className="container"><div className="mb-7"><p className="text-sm font-bold text-[var(--primary)]">CASE MANAGEMENT</p><h1 className="text-3xl font-extrabold">รายการเรื่องร้องเรียน</h1></div><StaffConsole cases={(cases ?? []) as StaffCase[]} agencies={(agencies ?? []) as Agency[]} /></div></main>;
+}
