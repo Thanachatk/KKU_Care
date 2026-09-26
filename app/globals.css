@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;600;700;800&display=swap');
 @import "tailwindcss";
 
-:root { --primary:#A73B24; --primary-hover:#8E2F1C; --primary-light:#F5E7E3; --bg:#FAF8F6; --card:#fff; --text:#292524; --muted:#78716C; --border:#E7E2DE; }
+:root { --primary:#166534; --primary-hover:#14532D; --primary-light:#DCFCE7; --surface-muted:#F3F8F4; --bg:#F8FAF8; --card:#fff; --text:#1C2B22; --muted:#647067; --border:#DCE7DE; }
 * { box-sizing:border-box; }
 html { background:var(--bg); }
 body { margin:0; background:var(--bg); color:var(--text); font-family:'Noto Sans Thai',system-ui,sans-serif; font-size:16px; }
