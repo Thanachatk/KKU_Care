@@ -5,11 +5,17 @@ import { useEffect, useState } from "react";
 
 export function ThemeToggle() {
   const [dark, setDark] = useState(false);
-  useEffect(() => setDark(document.documentElement.dataset.theme === "midnight"), []);
+  useEffect(() => {
+    const savedTheme = window.localStorage.getItem("kku-care-theme");
+    const isDark = savedTheme === "midnight";
+    document.documentElement.dataset.theme = isDark ? "midnight" : "warm";
+    setDark(isDark);
+  }, []);
   function toggle() {
     const next = !dark;
     document.documentElement.dataset.theme = next ? "midnight" : "warm";
+    window.localStorage.setItem("kku-care-theme", next ? "midnight" : "warm");
     setDark(next);
   }
-  return <button type="button" onClick={toggle} className="rounded-lg p-2 text-[#78716C] hover:bg-[#F5E7E3]" aria-label={dark ? "เปลี่ยนเป็นธีมสว่าง" : "เปลี่ยนเป็นธีมเข้ม"} title={dark ? "ธีมสว่าง" : "ธีมเข้ม"}>{dark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}</button>;
+  return <button type="button" onClick={toggle} className="theme-toggle rounded-lg p-2" aria-label={dark ? "เปลี่ยนเป็นธีมสว่าง" : "เปลี่ยนเป็นธีมเข้ม"} title={dark ? "ธีมสว่าง" : "ธีมเข้ม"}>{dark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}</button>;
 }
